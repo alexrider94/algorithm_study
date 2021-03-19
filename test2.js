@@ -1,9 +1,10 @@
-function solution(code){
-    var engArr=["zero","one","two","three","four","five","six","seven","eight","nine"]
-    var result = code.map(function(value){
+function solution(code) {
+    var engArr = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    var result = code.map(function (value) {
         var str = String(value);
+        console.log(str);
         var resultStr = '';
-        for(var i=0; i<str.length; i++){
+        for (var i = 0; i < str.length; i++) {
             resultStr += engArr[Number(str.charAt(i))];
         }
         return resultStr;
@@ -11,4 +12,4 @@ function solution(code){
     return result.sort();
 }
 
-console.log(solution([3,5,104]));
+console.log(solution([3, 5, 104]));
