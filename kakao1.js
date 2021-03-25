@@ -10,9 +10,9 @@ function solution(array){
             let [command, uid, name] = line.split(" ");
             if(command == "Leave" | !name) return names;
             names[uid] = name;
-            return names;67
+            return names;
         },{});
-    
+
     return array
             .filter(x => x.substr(0,6) !== "Change")
             .reduce((results, line) => {
