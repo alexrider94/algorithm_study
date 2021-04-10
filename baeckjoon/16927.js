@@ -49,18 +49,22 @@ rl.on('line', (line) => {
     for (let k = 0; k < R; k++) {
       let temp = matrix[rowStart][colStart];
 
+      //윗 라인
       for (let i = colStart; i < colEnd; ++i) {
         matrix[rowStart][i] = matrix[rowStart][i + 1];
       }
 
+      //오른쪽 라인
       for (let i = rowStart; i < rowEnd; ++i) {
         matrix[i][colEnd] = matrix[i + 1][colEnd];
       }
 
+      //아래쪽 라인
       for (let i = colEnd; i > colStart; --i) {
         matrix[rowEnd][i] = matrix[rowEnd][i - 1];
       }
 
+      //왼쪽라인
       for (let i = rowEnd; i > rowStart; --i) {
         matrix[i][colStart] = matrix[i - 1][colStart];
       }
