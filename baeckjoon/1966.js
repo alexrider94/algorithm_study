@@ -22,6 +22,24 @@ const rl = readline.createInterface({
 });
 let input = [];
 
+class Queue {
+  constructor() {
+    this.store = [];
+  }
+
+  enqueue(item) {
+    this.store.push(item);
+  }
+
+  dequeue() {
+    return this.store.shift();
+  }
+
+  front() {
+    return this.store[0];
+  }
+}
+
 rl.on('line', (line) => {
   input.push(line);
 }).on('close', () => {
@@ -34,8 +52,40 @@ rl.on('line', (line) => {
   const printQueue = (list) => {
     let [N, wantDocument] = list[0];
     let priorityList = list[1];
+    const q = new Queue();
+    let loop = true;
+    let count = 0;
+    for (let i = 0; i < N; ++i) {
+      q.enqueue([i, priorityList[i]]);
+    }
 
-    for (let i = 0; i < priorityList.length; ++i) {}
+    while (loop) {
+      max = 0;
+      let list1 = [];
+
+      for (let b = 0; b < q.store.length; ++b) {
+        list1 = q.store[b];
+        if (max < list1[1]) {
+          max = list1[1];
+        }
+      }
+
+      while (1) {
+        let list2 = q.front();
+        if (list2[1] == max) {
+          count++;
+          q.dequeue();
+          if (list2[0] == wantDocument) {
+            console.log(count);
+            loop = false;
+          }
+          break;
+        } else {
+          q.dequeue();
+          q.enqueue(list2);
+        }
+      }
+    }
   };
 
   for (let i = 0; i < list.length; ++i) {
