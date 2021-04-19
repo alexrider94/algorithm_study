@@ -25,10 +25,11 @@ rl.on('line', (line) => {
   let stack = [];
   let index = 0;
   for (let i = 0; i < list.length; ++i) {
-    if (i <= list[index]) {
-      stack.push(i);
-      index++;
-    }
+    stack.push(list[i]);
+  }
+
+  while (stack.length) {
+    stack[index];
   }
 });
 
