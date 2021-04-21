@@ -20,17 +20,35 @@ let input = [];
 rl.on('line', (line) => {
   input.push(line);
 }).on('close', () => {
-  let n = input[0];
   let list = input.slice(1).map((el) => parseInt(el));
   let stack = [];
-  let index = 0;
-  for (let i = 0; i < list.length; ++i) {
-    stack.push(list[i]);
+  let index = 1;
+  let answer = '';
+
+  while (index <= list[0]) {
+    stack.push(index);
+    answer += '+\n';
+    if (index == list[0]) break;
+    index++;
   }
 
-  while (stack.length) {
-    stack[index];
+  let i = 0;
+  while (i != list.length) {
+    let d = list[i];
+    if (stack.length == 0) stack.push(index);
+    if (d == stack[stack.length - 1]) {
+      stack.pop();
+      answer += '-\n';
+      i++;
+    } else if (d > stack[stack.length - 1]) {
+      stack.push(++index);
+      answer += '+\n';
+    } else if (d < stack[stack.length - 1]) {
+      console.log('NO');
+      return;
+    }
   }
+  console.log(answer.slice(0, -1));
 });
 
 /*
