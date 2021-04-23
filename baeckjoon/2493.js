@@ -27,12 +27,12 @@ rl.on('line', (line) => {
   for (let i = 0; i < n; ++i) {
     while (stack.length) {
       if (stack[stack.length - 1][1] > topList[i]) {
-        process.stdout.write(stack[stack.length - 1][0] + ' ');
+        console.log(stack[stack.length - 1][0] + ' ');
         break;
       }
       stack.pop();
     }
-    if (stack.length == 0) process.stdout.write('0 ');
+    if (stack.length == 0) console.log('0 ');
     stack.push([i + 1, topList[i]]);
   }
 });
