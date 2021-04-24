@@ -11,7 +11,7 @@ require('readline')
     let n = input[0];
     let count = new Array(10).fill(0);
     for (let i = 0; i < n.length; ++i) {
-      count[n[i] - '0']++;
+      count[n[i]]++;
     }
 
     let num = 0;
