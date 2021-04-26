@@ -22,7 +22,6 @@ require('readline')
   .on('close', () => {
     let [n, m] = input[0].split(' ').map((el) => parseInt(el));
     let checked = Array.from({ length: n + 1 }, () => false);
-    console.log(checked);
     let arr = Array.from({ length: n + 1 }, () => 0);
     let cnt = 1;
     const dfs = (cnt) => {
