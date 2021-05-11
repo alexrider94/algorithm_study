@@ -16,7 +16,6 @@ rl.on('line', (line) => {
       list[i - 1]--;
       cnt++;
     }
-    console.log(list);
   }
   console.log(cnt);
 });
