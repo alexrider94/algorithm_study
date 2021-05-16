@@ -14,7 +14,7 @@ require('readline')
     let bagWeight = input
       .slice(n + 1)
       .map((el) => parseInt(el))
-      .sort((a, b) => b - a);
+      .sort((a, b) => a - b);
     let jList = input
       .slice(1, n + 1)
       .map((el) => el.split(' ').map((el) => parseInt(el)))
@@ -24,15 +24,26 @@ require('readline')
         return b[1] - a[1];
       });
 
-    let idx = 0;
-
-    console.log(jList, bagWeight);
-
+    const lowerBound = (target, bag) => {
+      let start = 0;
+      let end = bag.length;
+      let mid;
+      while (start < end) {
+        mid = Math.floor((start + end) / 2);
+        if (bag[mid] >= target) end = mid;
+        else start = mid + 1;
+      }
+      return end;
+    };
+    let count = k;
     for (let i = 0; i < jList.length; ++i) {
-      if (idx == jList.length - 1) break;
-      if (jList[i][0] <= bagWeight[idx]) {
-        sum += jList[i][1];
-        idx++;
+      if (count == 0) break;
+      const [weight, price] = jList[i];
+      const base = lowerBound(weight, bagWeight);
+      if (base < bagWeight.length) {
+        bagWeight.splice(base, 1);
+        sum += price;
+        count--;
       }
     }
     console.log(sum);
@@ -66,6 +77,17 @@ require('readline')
 2
 */
 
+/*
+4 4
+1 100
+2 200
+13 300
+10 500
+10
+10
+10
+14
+*/
 // let jList = input
 //   .slice(1, n + 1)
 //   .map((el) => el.split(' ').map((el) => parseInt(el)))
