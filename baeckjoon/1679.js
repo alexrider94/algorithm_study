@@ -9,63 +9,45 @@ require('readline')
     let n = Number(input[0]);
     let list = input[1].split(' ').map((el) => parseInt(el));
     let num = Number(input[2]);
-    let graph = Array.from(Array(num), () => Array(num * list[list.length - 1]).fill(0));
-    const fill = (i) => {
-      for (let j = 0; j < list.length; ++j) {
-        graph[i][j] = list[j];
-        let index = 0;
-        while (index != num - 1) {
-          graph[index + 1][j] = graph[index][j] + 1;
-          index++;
+    let reach = Array(50001).fill(-1);
+    let bfs = () => {
+      let queue = [];
+      queue.push(0);
+      reach[0] = 0;
+      while (queue.length) {
+        let x = queue.shift();
+        if (reach[x] == num) {
+          continue;
         }
-      }
-
-      let xx = 1;
-      let row = 0;
-      while (xx != num) {
-        let y = xx * row;
-
-        //0 2 4
-        for (let i = 1; i < list.length; ++i) {
-          let x = 1;
-          console.log(x + row, list.length + row + y, list[i] * (xx + 1));
-          graph[x + row][list.length + row + y] = list[i] * (xx + 1);
-
-          while (x + row != num - 1) {
-            console.log(x + 1 + row, list.length + row + y);
-            graph[x + 1 + row][list.length + row + y] = graph[x + row][list.length + row + y] + 1;
-            x++;
+        for (let l of list) {
+          let y = x + l;
+          if (reach[y] == -1) {
+            queue.push(y);
+            reach[y] = reach[x] + 1;
           }
-          y++;
         }
-        xx++;
-        row++;
       }
+      console.log(reach);
+      for (let i = 0; i < 50001; ++i) {
+        if (reach[i] == -1) {
+          return i;
+        }
+      }
+      return -1;
     };
 
-    fill(0);
-    // 1 3
-    // 1 3 0  0  0  0
-    // 2 4 6  0  0  0
-    // 3 5 7  9  0  0
-    // 4 6 8 10 12  0
-    // 5 7 9 11 13 15
+    let res = bfs(list, n, num);
 
-    // 1 4 5
-    // 1 4 5
-    // 2 5 6 8 10
-    // 3 6 7 9 11 12 15
-    // 4 7 8 10 12 13 16 16 20
-    // 5 8 9 11 13 14 17 17 21 20 25
-
-    // 1 4 5 7
-    // 1 4 5
-    // 2 5 6 8 10
-    // 3 6 7 9 11 12 15
-    // 4 7 8 10 12 13 16 16 20
-    // 5 8 9 11 13 14 17 17 21 20 25
+    res % 2 == 0 ? console.log(`holsoon win at ${res}`) : console.log(`jjaksoon win at ${res}`);
   });
 /*
+
+1 3    1 4 5
+2 6    2 8 10
+3 9    3 12 15
+4 12   4 16 20
+5 15   5 20 25
+
 2
 1 3
 5
@@ -77,4 +59,49 @@ require('readline')
 2
 1 4 5 7
 5
+
+//34
+
+3
+1 2 3
+4
+
+5
+1 2 3 4 5
+2
 */
+
+// let graph = Array.from(Array(num), () => Array(num * list[list.length - 1]).fill(0));
+// const fill = (i) => {
+//   for (let j = 0; j < list.length; ++j) {
+//     graph[i][j] = list[j];
+//     let index = 0;
+//     while (index != num - 1) {
+//       graph[index + 1][j] = graph[index][j] + 1;
+//       index++;
+//     }
+//   }
+
+//   let xx = 1;
+//   let row = 0;
+//   let column = list.length;
+//   while (xx != num) {
+//     //0 2 4
+//     for (let i = 1; i < list.length; ++i) {
+//       let x = 1;
+//       // console.log(x + row, column, list[i] * (xx + 1));
+//       graph[x + row][column] = list[i] * (xx + 1);
+
+//       while (x + row != num - 1) {
+//         // console.log(x + 1 + row, column);
+//         graph[x + 1 + row][column] = graph[x + row][column] + 1;
+//         x++;
+//       }
+//       column++;
+//     }
+//     xx++;
+//     row++;
+//   }
+
+//   return graph;
+// };
