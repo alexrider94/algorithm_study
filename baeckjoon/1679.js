@@ -21,6 +21,7 @@ require('readline')
         }
         for (let l of list) {
           let y = x + l;
+
           if (reach[y] == -1) {
             queue.push(y);
             reach[y] = reach[x] + 1;
