@@ -1,4 +1,4 @@
-stduy algorithms with nodejs 
+Study algorithms with nodejs 
 
 - baekjoon
 - leetcode
