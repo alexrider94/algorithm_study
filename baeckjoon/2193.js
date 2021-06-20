@@ -7,7 +7,7 @@
 N(1 ≤ N ≤ 90)이 주어졌을 때, N자리 이친수의 개수를 구하는 프로그램을 작성하시오. */
 
 //BigInt
-
+// BigInt는 Number 원시 값이 안정적으로 나타낼 수 있는 최대치인 253 - 1보다 큰 정수를 표현할 수 있는 내장 객체입니다.
 let input = [];
 require('readline')
   .createInterface({ input: process.stdin, output: process.stdout })
