@@ -48,43 +48,43 @@ class Heap {
     }
 
     this.heap[index] = lastInsertedNode;
+  };
 
-    remove = () => {
-      const count = this.heap.length;
-      const rootNode = this.heap[0];
+  remove = () => {
+    const count = this.heap.length;
+    const rootNode = this.heap[0];
 
-      if (count <= 0) return undefined;
-      if (count == 1) return (this.heap = []);
-      else {
-        this.heap[0] = this.heap.pop();
-        this.heapifyDown();
-      }
+    if (count <= 0) return undefined;
+    if (count == 1) return (this.heap = []);
+    else {
+      this.heap[0] = this.heap.pop();
+      this.heapifyDown();
+    }
 
-      return rootNode;
-    };
+    return rootNode;
+  };
 
-    heapifyDown = () => {
-      let index = 0;
-      const count = this.heap.length;
-      const rootNode = this.heap[index];
+  heapifyDown = () => {
+    let index = 0;
+    const count = this.heap.length;
+    const rootNode = this.heap[index];
 
-      while (this.getLeftChildIndex(index) < count) {
-        const leftChildIndex = this.getLeftChildIndex(index);
-        const rightChildIndex = this.getRightChildIndex(index);
+    while (this.getLeftChildIndex(index) < count) {
+      const leftChildIndex = this.getLeftChildIndex(index);
+      const rightChildIndex = this.getRightChildIndex(index);
 
-        const smallerChildIndex =
-          rightChildIndex < count && this.heap[rightChildIndex].key < this.heap[leftChildIndex].key
-            ? rightChildIndex
-            : leftChildIndex;
+      const smallerChildIndex =
+        rightChildIndex < count && this.heap[rightChildIndex].key < this.heap[leftChildIndex].key
+          ? rightChildIndex
+          : leftChildIndex;
 
-        if (this.heap[smallerChildIndex].key <= rootNode.key) {
-          this.heap[index] = this.heap[smallerChildIndex];
-          index = smallerChildIndex;
-        } else break;
+      if (this.heap[smallerChildIndex].key <= rootNode.key) {
+        this.heap[index] = this.heap[smallerChildIndex];
+        index = smallerChildIndex;
+      } else break;
 
-        this.heap[index] = rootNode;
-      }
-    };
+      this.heap[index] = rootNode;
+    }
   };
 }
 
